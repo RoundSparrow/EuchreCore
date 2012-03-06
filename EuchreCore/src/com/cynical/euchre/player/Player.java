@@ -1,11 +1,14 @@
 package com.cynical.euchre.player;
 
 import com.cynical.euchre.domain.Card;
+import com.cynical.euchre.domain.EuchreHand;
 import com.cynical.euchre.domain.Suit;
 
-public abstract class Player {
+public abstract class Player implements Partner {
 	
 	private String name;
+	private EuchreHand cardHand;
+	
 	
 	///////////////////////////////////////////
 	//	Operations while laying cards
@@ -23,16 +26,10 @@ public abstract class Player {
 	
 	/**
 	 * If player is the dealer, and on the first round when deciding trump, the player will 
-	 * pick up the top (face up) card if trump is decided.
-	 * @return The top (face up) card. This card is trump.
+	 * pick up the top (face up) card if trump is decided. The player must then discard a card.
+	 * @return The card the player chooses to discard.
 	 */
 	public abstract Card pickUp(Card c);
-	
-	/**
-	 * The dealer must discard a card if trump is decided on the first pass.
-	 * @param c The card to discard.
-	 */
-	public abstract Card discard();
 	
 	/**
 	 * Order up trump to the dealer. Only available on first pass.
@@ -45,20 +42,16 @@ public abstract class Player {
 	public abstract void pass();
 	
 	/**
-	 * If on the second pass, player can has the opportunity to call trump. They can not 
+	 * If on the second pass, player has the opportunity to call trump. They can not 
 	 * choose the suit that was turned down on the first pass.
 	 * @param trump The suit to make trump.
 	 */
-	public abstract  void callTrump(Suit trump);
+	public abstract void callTrump(Suit trump);
 	
 	///////////////////////////////////////////
 	//	Etc.
 	///////////////////////////////////////////
 	
-	/**
-	 * Gets the name of the player.
-	 * @return The name of the player
-	 */
 	public String getName() {
 		return name;
 	}
