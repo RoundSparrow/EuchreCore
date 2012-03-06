@@ -1,8 +1,12 @@
 package com.cynical.euchre.domain;
 
+import java.io.Serializable;
+
 import com.cynical.euchre.player.Player;
 
-public class Card {	
+public class Card implements Serializable {	
+
+	private static final long serialVersionUID = -1770253436612087263L;
 	
 	private Suit suit;
 	private FaceValue rank;
